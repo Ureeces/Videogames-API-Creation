@@ -46,5 +46,19 @@ router.post('/createGame', (req, res) => {
 })
 
 // updateGame
+router.put('/updateGame/:id', (req, res) => {
+    let updateGame = req.body;
+        games.filter((foundGame) => {
+            if(foundGame.id === req.params.id) {
+                foundGame.name = updateGame.name ? updateGame.name : foundGame.name;
+                foundGame.description = updateGame.description ? updateGame.description : foundGame.description;
+                foundGame.yearReleased = updateGame.yearReleased ? updateGame.yearReleased : foundGame.yearReleased;
+                foundGame.playTime = updateGame.playTime ? updateGame.playTime : foundGame.playTime;
+                
+            }
+        });
+    
+        return res.status(200).json({ message: 'Game was updated.', games });
+})
 
 module.exports = router;
