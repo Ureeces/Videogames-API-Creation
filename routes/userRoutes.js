@@ -20,4 +20,31 @@ router.get('/getSingleGame/:id', (req, res) => {
         }
 })
 
+// createGame
+router.post('/createGame', (req, res) => {
+    if(!req.body.name || !req.body.description) {
+        return res
+            .status(400)
+            .json({ confirmation: 'fail', message: `Incorrect input (must have at least a name and description.)` });
+    }
+    
+    let existingGame = games.filter((game) => game.name === req.body.name);
+        if(existingGame.length) {
+            return res.status(400).send("This game already exists within this API multiverse.");
+        }
+
+    const newGame = {};
+
+    newGame.name = req.body.name;
+    newGame.description = req.body.description;
+    newGame.yearReleased = String(req.body.yearReleased) || 'NA';
+    newGame.playTime = req.body.playTime || 'NA';
+    newGame.id = String(games.length + 1);
+
+    games.push(newGame);
+    return res.status(200).json({ confirmation: 'success', newGame });
+})
+
+// updateGame
+
 module.exports = router;
