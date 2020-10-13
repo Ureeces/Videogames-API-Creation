@@ -23,3 +23,5 @@ const games = [
         playTime: '30+ mins per round'
     }
 ];
+
+module.exports = games;

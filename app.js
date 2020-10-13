@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Parent route
-app.use('api/v1/games', userRoutes);
+app.use('/api/v1/games', userRoutes);
 
 // Opening the ports
 app.listen(port, () => {
