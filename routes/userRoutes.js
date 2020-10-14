@@ -61,4 +61,12 @@ router.put('/updateGame/:id', (req, res) => {
         return res.status(200).json({ message: 'Game was updated.', games });
 })
 
+router.delete('/deleteGame/:id', (req, res) => {
+    let removeGame = games.filter((foundGame) => foundGame.id !== req.params.id);
+
+    games = removeGame;
+
+    return res.status(200).json({ confirmation: 'success', games });
+})
+
 module.exports = router;
